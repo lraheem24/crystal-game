@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+    <style>
+        #root {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+        //4 dummy buttons each with a random number assigned to them
+        //A larger random number for the user to attempt to reach
+        //User clicks button
+        //We read the random value associated with that button
+        //we add that to the users current sum
+        //Then compare that number to our target number to determine if we have a win, a loss, or siply keep playing
+        function generateSmallerRandomNumber() {
+            return Math.floor(Math.random() * 9 + 1);
+        }
+
+        function generateLargerRandomNumber() {
+            return Math.floor(Math.random() * 100 + 1);
+
+        }
+
+        var buttonNames = ['Button 1', 'Button 2', 'Button 3', 'Button 4']
+        for (var i = 0; i < buttonNames.length; i++) {
+            var button = "<button data-random='" + generateSmallerRandomNumber() + "' class='gem-button'>" + buttonNames[i] + "</button>";
+            $('#root').append(button);
+
+        }
+
+        var number = generateLargerRandomNumber();
+        var current = 0;
+
+        $(".gem-button").on("click", function() {
+            var btnVal = $(this).attr('data-random');
+            console.log("Button val is:");
+            console.log(btnVal);
+            console.log("User needs");
+            console.log(number);
+            current += parseInt(btnVal);
+            console.log("User currently has:");
+            console.log(current);
+            if (current > number) {
+                alert("You lose, game will start over");
+                current = 0;
+            } else if (current === number) {
+                alert("You win, game will start over");
+                current = 0;
+            }
+        });
+    </script>
+</body>
+
+</html>
