@@ -13,7 +13,12 @@
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root">
+        Crystal Collector!
+        <div id="goldstores">39</div>
+        <div id="win-and-loss"></div>
+        <div id="player-stores"></div>
+    </div>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script>
         //4 dummy buttons each with a random number assigned to them
@@ -41,6 +46,8 @@
         var number = generateLargerRandomNumber();
         var current = 0;
 
+        $("#goldstores").html(number);
+        $("#player-stores").html(current);
         $(".gem-button").on("click", function() {
             var btnVal = $(this).attr('data-random');
             console.log("Button val is:");
@@ -50,6 +57,7 @@
             current += parseInt(btnVal);
             console.log("User currently has:");
             console.log(current);
+            $("#player-stores").html(current);
             if (current > number) {
                 alert("You lose, game will start over");
                 current = 0;
